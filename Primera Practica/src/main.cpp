@@ -1,24 +1,23 @@
 #include <Arduino.h>
 
-#define pin 23
 #define LED 2
-#define digital 4
+int input;
 
 void setup() {
   Serial.begin(115200);
-  pinMode(pin, INPUT);
+  pinMode(LED, OUTPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  
-  if (digitalRead(pin)) {
-    digitalWrite(LED, HIGH);
-    Serial.println(analogRead(digital));
-    delay(100);
-  } else {
-    digitalWrite(LED, LOW);
-    Serial.println("LOW");
+  if(Serial.available()){
+    input =  Serial.read();
+    if(input=='a'){
+      digitalWrite(LED, HIGH);
+    }
+    else{
+      digitalWrite(LED, LOW);
+    }
   }
   delay(10);
 }
