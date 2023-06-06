@@ -1,18 +1,56 @@
-#include <Arduino.h>
+/*
+Juan Pablo Meraz - A01782191
 
-// put function declarations here:
-int myFunction(int, int);
+
+*/
+
+
+//Librerías
+#include <Arduino.h>
+#include <DHT.h>
+#include <Adafruit_Sensor.h>
+
+//Declaración de funciones
+int readTemp();
+int readHum();
+
+//Declaración de variables y constantes
+#define sensore_DHT 15
+
+//Declaración de objetos
+DHT sensor1(sensore_DHT, DHT11);
+
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(115200);
+  sensor1.begin();
+  pinMode(sensore_DHT, INPUT);
+  Serial.println("DHT11 Initialized");
+  delay(1000);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  Serial.print("Temperatura: ");
+  Serial.print(readTemp());
+  Serial.println("C");
+  Serial.print("Humedad: ");
+  Serial.print(readHum());
+  Serial.println("%");
+  delay(1500);
 }
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+int readTemp()
+{
+  float temp = sensor1.readTemperature();
+  return temp;
 }
+
+int readHum()
+{
+  float hum = sensor1.readHumidity();
+  return hum;
+}
+
+
+
+
