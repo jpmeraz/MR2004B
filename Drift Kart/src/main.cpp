@@ -82,8 +82,12 @@ void loop()
   lcd.print("Velocidad   " + String(vel) + "km/h");
   lcd.setCursor(0, 2);
   lcd.print("Temperatura " + String(temp) + "C");
+  Serial.print(temp);
+  Serial.println("C");
   lcd.setCursor(0, 3);
   lcd.print("Humedad     " + String(hum) + "%");
+  Serial.print(hum);
+  Serial.println("%");
   delay(30);
 }
 
